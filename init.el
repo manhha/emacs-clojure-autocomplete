@@ -10,13 +10,8 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-;; (require 'auto-complete)
-;; (require 'ac-slime)
-;; (add-hook 'slime-mode-hook 'set-up-slime-ac)
-;; (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-;; (eval-after-load "auto-complete"
-;;   '(add-to-list 'ac-modes 'slime-repl-mode))
-   
+
+;; START: AUTO COMPLETE CLOJURE   
 ;; auto complete
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
@@ -28,3 +23,14 @@
 (require 'ac-slime)
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+;; END: AUTO COMPLETE CLOJURE   
+
+;; START: CHANGE AUTOSAVE DIRECTORY
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/temp/.
+(custom-set-variables
+  '(auto-save-file-name-transforms '((".*" "~/temp/autosaves/\\1" t)))
+  '(backup-directory-alist '((".*" . "~/temp/backups/"))))
+
+;; create the autosave dir if necessary, since emacs won't.
+(make-directory "~/temp/autosaves/" t)
+;; END: CHANGE AUTOSAVE DIRECTORY
